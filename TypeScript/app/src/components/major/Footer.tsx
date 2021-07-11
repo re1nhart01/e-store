@@ -75,8 +75,6 @@ const Footer = (): JSX.Element => {
                     </div>
                 </div>
             </div>
-
-
             <div className="footer-bottom">
                 <div className="container">
                     <div className="row">
