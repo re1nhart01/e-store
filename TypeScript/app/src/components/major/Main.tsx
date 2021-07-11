@@ -1,14 +1,40 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 
+
+interface Category {
+    title: string,
+    id: number
+    category_url: string,
+    iconClassList: string
+}
 
 
 const Main = (): JSX.Element => {
 
 
+    const Cat: Category[] = [
+        {title: "Home", id: 1, category_url: "/product#list/Home", iconClassList: "fa fa-home"},
+        {title: "Best Selling", id: 2, category_url: "/product#list/BestSelling", iconClassList: "fa fa-shopping-bag"},
+        {title: "New Arrivals", id: 3, category_url: "/product#list/Home", iconClassList: "fa fa-plus-square"},
+        {title: "Fashion & Beauty", id: 4, category_url: "/product#list/Home", iconClassList: "fa fa-female"},
+    ]
+
+const CategoryList = () => {
+    return Cat.map(el => {
+        return (
+            <li className="nav-item">
+                <NavLink className="nav-link" to="/product#list"><i className={el.iconClassList}></i>{el.title}</NavLink>
+            </li>
+        )
+    })
+}
 
 
-    
+
+
+
 
     return (
         <>
@@ -18,37 +44,7 @@ const Main = (): JSX.Element => {
                         <div className="col-md-3">
                             <nav className="navbar bg-light">
                                 <ul className="navbar-nav">
-                                    <li className="nav-item">
-                                        <a className="nav-link" href="#"><i className="fa fa-home"></i>Home</a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a className="nav-link" href="#"><i className="fa fa-shopping-bag"></i>Best
-                                            Selling</a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a className="nav-link" href="#"><i className="fa fa-plus-square"></i>New
-                                            Arrivals</a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a className="nav-link" href="#"><i className="fa fa-female"></i>Fashion &
-                                            Beauty</a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a className="nav-link" href="#"><i className="fa fa-child"></i>Kids & Babies
-                                            Clothes</a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a className="nav-link" href="#"><i className="fa fa-tshirt"></i>Men & Women
-                                            Clothes</a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a className="nav-link" href="#"><i className="fa fa-mobile-alt"></i>Gadgets &
-                                            Accessories</a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a className="nav-link" href="#"><i className="fa fa-microchip"></i>Electronics
-                                            & Accessories</a>
-                                    </li>
+                                    {CategoryList()}
                                 </ul>
                             </nav>
                         </div>

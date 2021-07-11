@@ -2394,3 +2394,9 @@ h2 {
     text-align: center;
   }
 }
+
+
+.product-item {
+  width: 300px;
+  height: 250px;
+}
