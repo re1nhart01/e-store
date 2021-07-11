@@ -5,60 +5,34 @@ import { NavLink } from "react-router-dom";
 import {Rating} from "semantic-ui-react";
 import prod1 from "../../img/product-1.jpg"
 import axios from "axios";
-
-
-interface Features {
-    category: number
-    color: string
-    discount: boolean
-    images: string[]
-    price: number
-    quantity: number
-    rating: number
-    slug: string
-    title: string
-}
+import {Feature} from "../../interfaces";
 
 
 const responsive = {
-    superLargeDesktop: {
-        breakpoint: { max: 4000, min: 3000 },
-        items: 5
-    },
-    desktop: {
-        breakpoint: { max: 3000, min: 1024 },
-        items: 5
-    },
-    tablet: {
-        breakpoint: { max: 1024, min: 464 },
-        items: 5
-    },
-    mobile: {
-        breakpoint: { max: 464, min: 0 },
-        items: 5
-    }
+    superLargeDesktop: {breakpoint: { max: 4000, min: 3000 }, items: 5},
+    desktop: {breakpoint: { max: 3000, min: 1024 }, items: 5},
+    tablet: {breakpoint: { max: 1024, min: 464 }, items: 5},
+    mobile: {breakpoint: { max: 464, min: 0 }, items: 5}
 }
 
-const url = "http://127.0.0.1:8000/api/items/"
+
 
 const Features = (): JSX.Element => {
-const [apiData, setApiData]: [Features[], Function] = useState([])
+const [apiData, setApiData]: [Feature[], Function] = useState([])
+const url = "http://127.0.0.1:8000/api/items/"
 
-async function fetchFeatures() {
-    const response = await axios.get<Features[]>(url)
+
+    async function fetchFeatures() {
+    const response = await axios.get<Feature[]>(url)
         .then(res => {
             console.log(res.data);
             setApiData(res.data);
         })
 }
-
 useEffect(() => {
     fetchFeatures();
 },[])
 
-
-
-//{title: "Tishka8", rating: 4, price: 154, img: prod1, url: "product#item/1", id: 4}
 
 //onRate={}
 

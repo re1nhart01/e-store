@@ -4,18 +4,8 @@ import axios from "axios";
 import {Rating} from "semantic-ui-react";
 import {NavLink} from "react-router-dom";
 import prod1 from "../../img/product-1.jpg";
+import {Recent} from "../../interfaces";
 
-interface Recent {
-    category: number
-    color: string
-    discount: boolean
-    images: string[]
-    price: number
-    quantity: number
-    rating: number
-    slug: string
-    title: string
-}
 
 const RecentProduct = (): JSX.Element => {
 
