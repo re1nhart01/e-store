@@ -1,58 +1,69 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { NavLink } from "react-router-dom";
 import {Rating} from "semantic-ui-react";
 import prod1 from "../../img/product-1.jpg"
+import axios from "axios";
 
-interface Feature {
-    title: string,
-    rating: number,
-    price: number,
-    img: string,
-    url: string,
-    id: number
+
+interface Features {
+    category: number
+    color: string
+    discount: boolean
+    images: string[]
+    price: number
+    quantity: number
+    rating: number
+    slug: string
+    title: string
 }
 
 
-const Features = (): JSX.Element => {
-
-    const responsive = {
-        superLargeDesktop: {
-            breakpoint: { max: 4000, min: 3000 },
-            items: 5
-        },
-        desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 5
-        },
-        tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 5
-        },
-        mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 5
-        }
+const responsive = {
+    superLargeDesktop: {
+        breakpoint: { max: 4000, min: 3000 },
+        items: 5
+    },
+    desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 5
+    },
+    tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 5
+    },
+    mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 5
     }
+}
+
+const url = "http://127.0.0.1:8000/api/items/"
+
+const Features = (): JSX.Element => {
+const [apiData, setApiData]: [Features[], Function] = useState([])
+
+async function fetchFeatures() {
+    const response = await axios.get<Features[]>(url)
+        .then(res => {
+            console.log(res.data);
+            setApiData(res.data);
+        })
+}
+
+useEffect(() => {
+    fetchFeatures();
+},[])
 
 
-    const Feat: Feature[] = [
-        {title: "Tishka1", rating: 4, price: 154, img: prod1, url: "product#item/1", id: 1},
-        {title: "Tishka2", rating: 4, price: 154, img: prod1, url: "product#item/1", id: 2},
-        {title: "Tishka3", rating: 4, price: 154, img: prod1, url: "product#item/1", id: 3},
-        {title: "Tishka4", rating: 4, price: 154, img: prod1, url: "product#item/1", id: 4},
-        {title: "Tishka5", rating: 4, price: 154, img: prod1, url: "product#item/1", id: 1},
-        {title: "Tishka6", rating: 4, price: 154, img: prod1, url: "product#item/1", id: 2},
-        {title: "Tishka7", rating: 4, price: 154, img: prod1, url: "product#item/1", id: 3},
-        {title: "Tishka8", rating: 4, price: 154, img: prod1, url: "product#item/1", id: 4},
-    ]
 
+//{title: "Tishka8", rating: 4, price: 154, img: prod1, url: "product#item/1", id: 4}
 
 //onRate={}
 
     const FeaturesList = () => {
-        return Feat.map(el => {
+        return apiData.map(el => {
        return ( <div className="col-lg-3">
             <div className="product-item">
                 <div className="product-title">
@@ -62,8 +73,8 @@ const Features = (): JSX.Element => {
                     </div>
                 </div>
                 <div className="product-image">
-                    <NavLink to={el.url}>
-                        <img src={el.img} alt="Product Image" />
+                    <NavLink to={el.slug}>
+                        <img src={prod1} alt="Product Image" />
                     </NavLink>
                     <div className="product-action">
                         <a href="#"><i className="fa fa-cart-plus"></i></a>

@@ -1,28 +1,38 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 
 
 interface Category {
     title: string,
     id: number
-    category_url: string,
+    description: string,
     iconClassList: string
 }
 
+const url: string = "http://127.0.0.1:8000/api/categories"
 
 const Main = (): JSX.Element => {
+const [apiData, setApiData]: [Category[], Function] = useState([]);
 
+   async function fetchCategory() {
+        const response = await axios.get(url)
+            .then(res => {
+                setApiData(res.data);
+                console.log(apiData)
+            })
+    }
 
-    const Cat: Category[] = [
-        {title: "Home", id: 1, category_url: "/product#list/Home", iconClassList: "fa fa-home"},
-        {title: "Best Selling", id: 2, category_url: "/product#list/BestSelling", iconClassList: "fa fa-shopping-bag"},
-        {title: "New Arrivals", id: 3, category_url: "/product#list/Home", iconClassList: "fa fa-plus-square"},
-        {title: "Fashion & Beauty", id: 4, category_url: "/product#list/Home", iconClassList: "fa fa-female"},
-    ]
+    useEffect(() => {
+        fetchCategory();
+
+    }, [])
+
+//{title: "Fashion & Beauty", id: 4, description: "/product#list/Home", iconClassList: "fa fa-female"}
 
 const CategoryList = () => {
-    return Cat.map(el => {
+    return apiData.map(el => {
         return (
             <li className="nav-item">
                 <NavLink className="nav-link" to="/product#list"><i className={el.iconClassList}></i>{el.title}</NavLink>

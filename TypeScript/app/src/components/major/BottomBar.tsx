@@ -1,5 +1,5 @@
 import React from "react"
-
+import Logo from "./../../img/logo.png"
 interface IProps {
 
 }
@@ -14,7 +14,7 @@ const BottomBar: React.FC<IProps> = (props: IProps): JSX.Element  =>{
                         <div className="col-md-3">
                             <div className="logo">
                                 <a href="index.html">
-                                    <img src="img/logo.png" alt="Logo" />
+                                    <img src={Logo} alt="Logo" />
                                 </a>
                             </div>
                         </div>

@@ -19,7 +19,7 @@ RATING_CHOICES = [
 
 class Category(models.Model):
     title = models.CharField(verbose_name='Name', max_length=254, null=False, default='DummyCategory')
-    description = models.TextField(verbose_name='Description', max_length=5000, null=True)
+    category_url = models.CharField(verbose_name='Category_Url', max_length=255, null=True)
     iconClassList = models.CharField(verbose_name='Icons', max_length=254, null=True)
 
     class Meta:

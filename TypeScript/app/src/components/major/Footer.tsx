@@ -49,7 +49,7 @@ const Footer = (): JSX.Element => {
                             <div className="footer-widget">
                                 <h2>Purchase Info</h2>
                                 <ul>
-                                    <li><a href="#">Pyament Policy</a></li>
+                                    <li><a href="#">Payment Policy</a></li>
                                     <li><a href="#">Shipping Policy</a></li>
                                     <li><a href="#">Return Policy</a></li>
                                 </ul>
