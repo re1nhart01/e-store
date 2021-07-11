@@ -3,9 +3,16 @@ from .models import Item, Category, ItemImage, Reviews
 
 
 class ItemSerializer(serializers.ModelSerializer):
+    images = serializers.SerializerMethodField('get_images')
+
     class Meta:
         model = Item
-        fields = '__all__'
+        fields = ['title', 'rating', 'price', 'quantity', 'discount', 'color', 'category', 'slug', 'images']
+
+    def get_images(self, item):
+        images = ItemImage.objects.filter(item=item)
+        if any(images):
+            return [image.get_absolute_image_url for image in images]
 
 
 class CategorySerializer(serializers.ModelSerializer):

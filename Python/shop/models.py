@@ -1,5 +1,7 @@
 from django.db import models
 
+from Python import settings
+
 COLORS = [
     ('wh', 'White'),
     ('blm', 'Black'),
@@ -18,7 +20,7 @@ RATING_CHOICES = [
 class Category(models.Model):
     title = models.CharField(verbose_name='Name', max_length=254, null=False, default='DummyCategory')
     description = models.TextField(verbose_name='Description', max_length=5000, null=True)
-    image = models.ImageField(verbose_name='Image', upload_to='categories/')
+    iconClassList = models.CharField(verbose_name='Icons', max_length=254, null=True)
 
     class Meta:
         verbose_name_plural = 'Categories'
@@ -30,7 +32,7 @@ class Category(models.Model):
 class Item(models.Model):
     title = models.CharField(verbose_name='Item_name', max_length=254, null=False, default='DummyItem')
     rating = models.IntegerField(verbose_name='Rating', choices=RATING_CHOICES, null=True)
-    price = models.DecimalField(verbose_name='Price', decimal_places=2, max_digits=10)
+    price = models.FloatField(verbose_name='Price', null=False)
     quantity = models.PositiveIntegerField(verbose_name='Quantity', default=0)
     discount = models.BooleanField(verbose_name='Discount', default=False)
     color = models.CharField(verbose_name='Colors', choices=COLORS, null=False, max_length=5)
@@ -50,6 +52,10 @@ class ItemImage(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/')
     default = models.BooleanField(default=False)
+
+    @property
+    def get_absolute_image_url(self):
+        return "{0}{1}".format(settings.MEDIA_URL, self.image.url)
 
     def __str__(self):
         return self.name

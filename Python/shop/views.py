@@ -1,9 +1,8 @@
-from django.shortcuts import render
-from rest_framework import generics
-from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
+from rest_framework import generics, decorators
 
-from .models import Item
-from .serializers import ItemSerializer
+from .models import Item, Category, ItemImage
+from .serializers import ItemSerializer, CategorySerializer
 
 
 class ItemsView(generics.ListAPIView):
@@ -11,6 +10,15 @@ class ItemsView(generics.ListAPIView):
     serializer_class = ItemSerializer
 
 
-class ItemDetailView(generics.RetrieveAPIView):
-    queryset = get_object_or_404(Item)
-    serializer_class = ItemSerializer
+class CategoriesView(generics.ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+
+@decorators.api_view(['GET', 'POST'])
+def item_detail_view(request, slug):
+    item = Item.objects.get(slug=slug)
+    if request.method == 'GET':
+        serializer = ItemSerializer(item)
+        return Response(serializer.data, status=200)
+
