@@ -1,8 +1,8 @@
 from rest_framework.response import Response
-from rest_framework import generics, decorators
+from rest_framework import generics, decorators, status
 
-from .models import Item, Category, ItemImage
-from .serializers import ItemSerializer, CategorySerializer
+from .models import Item, Category
+from .serializers import ItemSerializer, CategorySerializer, RegisterUserSerializer
 
 
 class ItemsView(generics.ListAPIView):
@@ -20,5 +20,17 @@ def item_detail_view(request, slug):
     item = Item.objects.get(slug=slug)
     if request.method == 'GET':
         serializer = ItemSerializer(item)
-        return Response(serializer.data, status=200)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
+
+@decorators.api_view(['POST'])
+def user_registration(request):
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            serializer = RegisterUserSerializer(data=request.data)
+            if serializer.is_valid():
+                user = serializer.save()
+                if user:
+                    return Response(status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
