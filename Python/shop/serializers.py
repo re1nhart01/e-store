@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Item, Category, ItemImage, Reviews
+from .models import Item, Category, ItemImage, Reviews, WishList
 from django.contrib.auth.models import User
 
 
@@ -47,3 +47,9 @@ class RegisterUserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+
+
+class WishlistSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WishList
+        fields = ['user', 'items']
