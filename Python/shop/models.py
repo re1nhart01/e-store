@@ -75,4 +75,7 @@ class Reviews(models.Model):
 
 class WishList(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
-    items = models.ForeignKey(Item, on_delete=models.CASCADE, null=True)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        unique_together = ['user', 'item']

@@ -52,4 +52,4 @@ class RegisterUserSerializer(serializers.ModelSerializer):
 class WishlistSerializer(serializers.ModelSerializer):
     class Meta:
         model = WishList
-        fields = ['user', 'items']
+        fields = ['user', 'item']
