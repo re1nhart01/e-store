@@ -43,7 +43,7 @@ def wishlist_view(request, slug):
             if wishlist:
                 wishlist.delete()
                 return Response(status=status.HTTP_200_OK)
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
         if request.method == 'GET':
             wish_dict = {'user': request.user.pk, 'items': []}
