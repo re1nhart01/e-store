@@ -1,11 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import Header from "./major/Header";
 import BottomBar from "./major/BottomBar";
 import Footer from "./major/Footer";
+import { NavLink } from "react-router-dom";
 
 
 
 const Account = (): JSX.Element => {
+
+    const [accountState, setAccountState] = useState(1)
+
     return (
         <>
             <Header />
@@ -24,22 +28,22 @@ const Account = (): JSX.Element => {
                     <div className="row">
                         <div className="col-md-3">
                             <div className="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
-                                <a className="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab"
-                                   role="tab"><i className="fa fa-tachometer-alt"></i>Dashboard</a>
-                                <a className="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab"
-                                   role="tab"><i className="fa fa-shopping-bag"></i>Orders</a>
-                                <a className="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab"
-                                   role="tab"><i className="fa fa-credit-card"></i>Payment Method</a>
-                                <a className="nav-link" id="address-nav" data-toggle="pill" href="#address-tab"
-                                   role="tab"><i className="fa fa-map-marker-alt"></i>address</a>
-                                <a className="nav-link" id="account-nav" data-toggle="pill" href="#account-tab"
-                                   role="tab"><i className="fa fa-user"></i>Account Details</a>
-                                <a className="nav-link" href="index.html"><i className="fa fa-sign-out-alt"></i>Logout</a>
+                                <button onClick={() => setAccountState(1)} className="nav-link active" id="dashboard-nav" data-toggle="pill"
+                                   role="tab"><i className="fa fa-tachometer-alt"></i>Dashboard</button>
+                                <button onClick={() => setAccountState(2)} className="nav-link" id="orders-nav" data-toggle="pill"
+                                   role="tab"><i className="fa fa-shopping-bag"></i>Orders</button>
+                                <button onClick={() => setAccountState(3)} className="nav-link" id="payment-nav" data-toggle="pill"
+                                   role="tab"><i className="fa fa-credit-card"></i>Payment Method</button>
+                                <button onClick={() => setAccountState(4)} className="nav-link" id="address-nav" data-toggle="pill"
+                                   role="tab"><i className="fa fa-map-marker-alt"></i>address</button>
+                                <button onClick={() => setAccountState(5)} className="nav-link" id="account-nav" data-toggle="pill"
+                                   role="tab"><i className="fa fa-user"></i>Account Details</button>
+                                <NavLink to="/" className="nav-link" ><i className="fa fa-sign-out-alt"></i>Logout</NavLink>
                             </div>
                         </div>
                         <div className="col-md-9">
                             <div className="tab-content">
-                                <div className="tab-pane fade show active" id="dashboard-tab" role="tabpanel"
+                                <div className={`tab-pane fade ${accountState === 1 ? "show active": " "}`} id="dashboard-tab" role="tabpanel"
                                      aria-labelledby="dashboard-nav">
                                     <h4>Dashboard</h4>
                                     <p>
@@ -50,7 +54,7 @@ const Account = (): JSX.Element => {
                                         eros. Aliquam et sapien eget arcu rhoncus scelerisque.
                                     </p>
                                 </div>
-                                <div className="tab-pane fade" id="orders-tab" role="tabpanel"
+                                <div className={`tab-pane fade ${accountState === 2 ? "show active": " "}`} id="orders-tab" role="tabpanel"
                                      aria-labelledby="orders-nav">
                                     <div className="table-responsive">
                                         <table className="table table-bordered">
@@ -99,7 +103,7 @@ const Account = (): JSX.Element => {
                                         </table>
                                     </div>
                                 </div>
-                                <div className="tab-pane fade" id="payment-tab" role="tabpanel"
+                                <div className={`tab-pane fade ${accountState === 3 ? "show active": " "}`} id="payment-tab" role="tabpanel"
                                      aria-labelledby="payment-nav">
                                     <h4>Payment Method</h4>
                                     <p>
@@ -110,7 +114,7 @@ const Account = (): JSX.Element => {
                                         eros. Aliquam et sapien eget arcu rhoncus scelerisque.
                                     </p>
                                 </div>
-                                <div className="tab-pane fade" id="address-tab" role="tabpanel"
+                                <div className={`tab-pane fade ${accountState === 4 ? "show active": " "}`} id="address-tab" role="tabpanel"
                                      aria-labelledby="address-nav">
                                     <h4>Address</h4>
                                     <div className="row">
@@ -128,7 +132,7 @@ const Account = (): JSX.Element => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="tab-pane fade" id="account-tab" role="tabpanel"
+                                <div className={`tab-pane fade ${accountState === 5 ? "show active": " "}`} id="account-tab" role="tabpanel"
                                      aria-labelledby="account-nav">
                                     <h4>Account Details</h4>
                                     <div className="row">

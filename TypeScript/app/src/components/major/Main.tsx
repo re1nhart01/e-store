@@ -16,7 +16,7 @@ interface Category {
 }
 
 const url: string = "http://127.0.0.1:8000/api/categories"
-const Main = (): JSX.Element => {
+const Main: React.FC = (): JSX.Element => {
 const [apiData, setApiData]: [Category[], Function] = useState([]);
 const state = useContext(context)
     console.log(state, 54);
