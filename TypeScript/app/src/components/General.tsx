@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import Header from "./major/Header";
 import BottomBar from "./major/BottomBar";
 import Main from "./major/Main";
@@ -10,11 +10,19 @@ import Newsletter from "./major/Newsletter";
 import RecentProduct from "./major/RecentProduct";
 import Review from "./major/Review";
 import Footer from "./major/Footer";
+import context from "../context";
 
 
-
+interface IProps {
+    id: number,
+    name: string,
+    surname: string,
+    token: string
+}
 
 const General = (): JSX.Element => {
+    const state = useContext(context)
+    console.log(state)
     return (
         <>
             <Header />

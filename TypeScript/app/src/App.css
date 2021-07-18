@@ -2405,3 +2405,16 @@ h2 {
   width: 900px;
   height: 300px;
 }
+
+
+.hidden {
+  display: none;
+  transition: 0.8s;
+}
+
+
+.carousel54 {
+  position: relative;
+  left: 50px;
+}
+
