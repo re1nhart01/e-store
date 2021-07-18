@@ -30,3 +30,22 @@ export interface Recent {
     slug: string
     title: string
 }
+
+
+export  interface DispatchData {
+    type: string,
+    payload: Data
+}
+
+export interface Tokens {
+    refresh: string,
+    access: string
+}
+
+
+export interface Data {
+    username: string,
+    password: string,
+    email?: string
+}
+

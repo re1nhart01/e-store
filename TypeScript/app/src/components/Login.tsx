@@ -1,12 +1,35 @@
-import React from "react";
+import React, {useState} from "react";
 import Header from "./major/Header";
 import Footer from "./major/Footer";
 import BottomBar from "./major/BottomBar";
+import {connect} from "react-redux";
+import {Login, PushUserData} from "../redux/actions/actions";
+
+
+interface IProps {
+    PushUserData: Function,
+    Login: Function
+}
+
+
+const Authorization: React.FC<IProps> = (props: IProps): JSX.Element => {
+    //Register
+const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("")
+const onRegisterSubmit = (): void => {
+    props.PushUserData(username, password, email);
+}
 
 
 
+//Auth
+    const [login, setLogin] = useState("")
+    const [Authpassword, setAuth] = useState("")
+const onLoginSubmit = () => {
+        props.Login(login, Authpassword)
+}
 
-const Authorization = (): JSX.Element => {
     return (
         <>
         <Header />
@@ -36,22 +59,22 @@ const Authorization = (): JSX.Element => {
                                     </div>
                                     <div className="col-md-6">
                                         <label>E-mail</label>
-                                        <input className="form-control" type="text" placeholder="E-mail"/>
+                                        <input className="form-control" value={email} onChange={(e) => {setEmail(e.target.value)}}  type="text" placeholder="E-mail"/>
                                     </div>
                                     <div className="col-md-6">
                                         <label>Mobile No</label>
-                                        <input className="form-control" type="text" placeholder="Mobile No"/>
+                                        <input className="form-control" value={username} onChange={(e) => {setUsername(e.target.value)}} type="text" placeholder="UserName"/>
                                     </div>
                                     <div className="col-md-6">
                                         <label>Password</label>
-                                        <input className="form-control" type="text" placeholder="Password"/>
+                                        <input className="form-control" value={password} onChange={(e) => {setPassword(e.target.value)}} type="text" placeholder="Password"/>
                                     </div>
                                     <div className="col-md-6">
                                         <label>Retype Password</label>
-                                        <input className="form-control" type="text" placeholder="Password"/>
+                                        <input className="form-control"  type="text" placeholder="Password"/>
                                     </div>
                                     <div className="col-md-12">
-                                        <button className="btn">Submit</button>
+                                        <button onClick={onRegisterSubmit} className="btn">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -61,11 +84,11 @@ const Authorization = (): JSX.Element => {
                                 <div className="row">
                                     <div className="col-md-6">
                                         <label>E-mail / Username</label>
-                                        <input className="form-control" type="text" placeholder="E-mail / Username"/>
+                                        <input value={login} onChange={e => setLogin(e.target.value)} className="form-control" type="text" placeholder="E-mail / Username"/>
                                     </div>
                                     <div className="col-md-6">
                                         <label>Password</label>
-                                        <input className="form-control" type="text" placeholder="Password"/>
+                                        <input value={Authpassword} onChange={e => setAuth(e.target.value)} className="form-control" type="text" placeholder="Password"/>
                                     </div>
                                     <div className="col-md-12">
                                         <div className="custom-control custom-checkbox">
@@ -74,7 +97,7 @@ const Authorization = (): JSX.Element => {
                                         </div>
                                     </div>
                                     <div className="col-md-12">
-                                        <button className="btn">Submit</button>
+                                        <button onClick={onLoginSubmit} className="btn">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -88,4 +111,8 @@ const Authorization = (): JSX.Element => {
 }
 
 
-export default Authorization
+const mapStateToProps = (state: any) => {
+    return state
+}
+
+export default connect(mapStateToProps, {PushUserData, Login})(Authorization)
