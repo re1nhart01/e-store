@@ -1,13 +1,13 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import Header from "./major/Header";
 import BottomBar from "./major/BottomBar";
 import Footer from "./major/Footer";
 import { NavLink } from "react-router-dom";
+import {connect, ReactReduxContext, useSelector} from "react-redux";
 
 
 
-const Account = (): JSX.Element => {
-
+const Account = (props: any): JSX.Element => {
     const [accountState, setAccountState] = useState(1)
 
     return (
@@ -184,4 +184,4 @@ const Account = (): JSX.Element => {
 }
 
 
-export default Account
+export default connect()(Account)
