@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9d1b4cbf-1284-412a-aa7c-a65ffbc46b10" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +31,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="MTHome" />
   </component>
@@ -68,7 +70,14 @@
       <updated>1625949416380</updated>
       <workItem from="1625949442521" duration="7432000" />
       <workItem from="1625989720453" duration="2356000" />
-      <workItem from="1626019223898" duration="8350000" />
+      <workItem from="1626019223898" duration="9103000" />
+      <workItem from="1626125003415" duration="978000" />
+      <workItem from="1626163413089" duration="8000" />
+      <workItem from="1626194924314" duration="985000" />
+      <workItem from="1626274483113" duration="5640000" />
+      <workItem from="1626333282097" duration="4444000" />
+      <workItem from="1626384367628" duration="3715000" />
+      <workItem from="1626422873023" duration="2858000" />
     </task>
     <servers />
   </component>

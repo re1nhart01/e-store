@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 from Python import settings
 
 COLORS = [
@@ -67,6 +67,15 @@ class Reviews(models.Model):
     email = models.EmailField(null=True)
     review = models.TextField(max_length=5000, null=False)
     date = models.DateField(auto_now_add=True)
+    image = models.ImageField(upload_to='reviews', default='categories/sad_panda.jpg')
 
     def __str__(self):
         return f"{self.name}'s review"
+
+
+class WishList(models.Model):
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        unique_together = ['user', 'item']
