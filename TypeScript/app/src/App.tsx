@@ -3,7 +3,7 @@ import './App.css';
 import context from './context';
 import {Component, Routing} from "./Routing";
 
-
+Object
 interface IProps {}
 interface IState {
     name: string,

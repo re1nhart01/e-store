@@ -6,8 +6,6 @@ import {Data, DispatchData} from "../../interfaces";
 
 
 
-
-
 export const PushUserData = (username: string, password: string, email: string) => async (dispatch: Dispatch<DispatchData>) => {
     const response = await axios.post<Data>("http://127.0.0.1:8000/api/user/register", {
         username:username,
