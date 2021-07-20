@@ -61,6 +61,24 @@ class ItemImage(models.Model):
         return self.name
 
 
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, null=False)
+    quantity = models.PositiveIntegerField(default=1)
+    ordered = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.quantity} of {self.item.title}"
+
+
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    cart_items = models.ManyToManyField(Cart)
+    start_date = models.DateTimeField(auto_now_add=True)
+    ordered_date = models.DateTimeField()
+    ordered = models.BooleanField(default=False)
+
+
 class Reviews(models.Model):
     name = models.CharField(verbose_name='Name', max_length=254)
     rating = models.IntegerField(verbose_name='Rating', choices=RATING_CHOICES, null=False, default=0)
