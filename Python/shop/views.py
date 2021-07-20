@@ -1,8 +1,9 @@
 from rest_framework.response import Response
 from rest_framework import generics, decorators, status
+from django.shortcuts import get_object_or_404
 
-from .models import Item, Category, WishList
-from .serializers import ItemSerializer, CategorySerializer, WishlistSerializer
+from .models import Item, Category, WishList, Cart
+from .serializers import ItemSerializer, CategorySerializer, WishlistSerializer, CartSerializer
 
 
 # Items, Categories
@@ -55,3 +56,23 @@ def wishlist_view(request, slug):
 
     return Response(status=status.HTTP_401_UNAUTHORIZED)
 
+
+# Cart and Order logic
+@decorators.api_view(['POST'])
+def add_to_cart(request, slug):
+    if request.user.is_authenticated:
+        user = request.user
+        item = get_object_or_404(Item, slug=slug)
+        # need quantity from front
+        quantity = request.data['quantity']
+        if request.method == 'POST':
+            cart_serializer = CartSerializer(data={'user': user.pk, 'item': item.pk, 'quantity': quantity})
+            if cart_serializer.is_valid():
+                cart_serializer.save()
+                return Response(status=status.HTTP_201_CREATED)
+
+            return Response(data=cart_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    return Response(status=status.HTTP_401_UNAUTHORIZED)
