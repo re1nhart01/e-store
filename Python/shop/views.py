@@ -76,3 +76,19 @@ def add_to_cart(request, slug):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
     return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+
+@decorators.api_view(['GET'])
+def get_cart(request):
+    if request.user.is_authenticated:
+        user = request.user
+        carts = Cart.objects.filter(user=user)
+        if carts:
+            cart_list = []
+            for cart in carts:
+                cart_list.append({'item': cart.item.title, 'quantity': cart.quantity})
+                return Response(data=cart_list, status=status.HTTP_200_OK)
+
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    return Response(status=status.HTTP_401_UNAUTHORIZED)
