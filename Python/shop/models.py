@@ -68,7 +68,7 @@ class Cart(models.Model):
     ordered = models.BooleanField(default=False)
 
     class Meta:
-        unique_together = ['user', 'item', 'quantity']
+        unique_together = ['user', 'item']
 
     def __str__(self):
         return f"{self.quantity} of {self.item.title}"
