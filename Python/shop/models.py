@@ -78,7 +78,7 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     cart_items = models.ManyToManyField(Cart)
     start_date = models.DateTimeField(auto_now_add=True)
-    ordered_date = models.DateTimeField()
+    ordered_date = models.DateTimeField(null=True)
     ordered = models.BooleanField(default=False)
 
 

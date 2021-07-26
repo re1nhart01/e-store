@@ -144,7 +144,7 @@ CORS_ALLOWED_ORIGINS = ['http://localhost:3000']
 
 MEDIA_ROOT = 'media/'
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 
 REST_FRAMEWORK = {
 

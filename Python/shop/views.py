@@ -3,7 +3,7 @@ from rest_framework import generics, decorators, status
 from django.shortcuts import get_object_or_404
 
 from .models import Item, Category, WishList, Cart
-from .serializers import ItemSerializer, CategorySerializer, WishlistSerializer, CartSerializer
+from .serializers import ItemSerializer, CategorySerializer, WishlistSerializer, CartSerializer, OrderSerializer
 
 
 # Items, Categories
@@ -87,8 +87,30 @@ def get_cart(request):
             cart_list = []
             for cart in carts:
                 cart_list.append({'item': cart.item.title, 'quantity': cart.quantity})
-                return Response(data=cart_list, status=status.HTTP_200_OK)
+            return Response(data=cart_list, status=status.HTTP_200_OK)
 
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+
+@decorators.api_view(['POST'])
+def make_order(request):
+    if request.user.is_authenticated:
+        user = request.user
+        unpayed_cart = Cart.objects.filter(user=user, ordered=False)
+        if unpayed_cart:
+            cart = [item.pk for item in unpayed_cart]
+            order_serializer = OrderSerializer(data={'user': user.pk, 'cart_items': cart, 'ordered': True})
+            if order_serializer.is_valid():
+                for item in unpayed_cart:
+                    item.ordered = True
+                    item.save()
+                order_serializer.save()
+                return Response(status=status.HTTP_201_CREATED)
+
+            return Response(order_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    return Response(status=status.HTTP_403_FORBIDDEN)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Item, Category, ItemImage, Reviews, WishList, Cart
+from .models import Item, Category, ItemImage, Reviews, WishList, Cart, Order
 from django.contrib.auth.models import User
 
 
@@ -58,4 +58,10 @@ class WishlistSerializer(serializers.ModelSerializer):
 class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
+        fields = '__all__'
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
         fields = '__all__'
